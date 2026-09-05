@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI Revenue Recovery — detect revenue at risk, choose the right intervention, and recover money safely." />
+  <title>RecoverAI — Revenue Recovery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">R</div>
+        <div>
+          <strong>RecoverAI</strong>
+          <span>Revenue Intelligence</span>
+        </div>
+      </div>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview">
+          <span class="nav-icon">⌂</span><span>Overview</span>
+        </button>
+        <button class="nav-item" data-view="recovery">
+          <span class="nav-icon">↗</span><span>Recovery Queue</span><b id="queueBadge">7</b>
+        </button>
+        <button class="nav-item" data-view="transactions">
+          <span class="nav-icon">▤</span><span>Transactions</span>
+        </button>
+        <button class="nav-item" data-view="agent">
+          <span class="nav-icon">✦</span><span>AI Agent</span>
+        </button>
+        <button class="nav-item" data-view="audit">
+          <span class="nav-icon">◷</span><span>Audit Trail</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="agent-status">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Agent online</strong>
+            <span>Monitoring payments</span>
+          </div>
+        </div>
+        <button class="settings-btn" id="settingsBtn">⚙ Settings</button>
+        <div class="profile">
+          <div class="avatar">SK</div>
+          <div>
+            <strong>Shantanu Kumar</strong>
+            <span>Administrator</span>
+          </div>
+          <span class="profile-more">•••</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">REVENUE RECOVERY</p>
+          <h1 id="pageTitle">Overview</h1>
+        </div>
+        <div class="topbar-actions">
+          <div class="live-indicator"><span></span> Live</div>
+          <button class="icon-btn" title="Notifications" id="notificationBtn">♢<i></i></button>
+          <button class="simulate-btn" id="simulateBtn">＋ Simulate payment</button>
+        </div>
+      </header>
+
+      <section class="view active" id="overviewView">
+        <div class="hero-row">
+          <div>
+            <h2>Find revenue that's <em>slipping away</em><br>and win it back.</h2>
+            <p>RecoverAI detects revenue at risk, diagnoses the cause, selects a bounded intervention, and verifies the outcome.</p>
+          </div>
+          <div class="hero-actions">
+            <button class="primary-btn" id="runAgentBtn">✦ Run recovery agent</button>
+            <button class="secondary-btn" id="exportBtn">Export report</button>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric-card">
+            <div class="metric-label">Revenue at risk <span class="info">i</span></div>
+            <div class="metric-value" id="riskValue">₹1,42,000</div>
+            <div class="metric-foot negative">↑ 12.4% <span>vs last 7 days</span></div>
+          </article>
+          <article class="metric-card featured">
+            <div class="metric-label">Revenue recovered</div>
+            <div class="metric-value" id="recoveredValue">₹87,000</div>
+            <div class="metric-foot positive">61.2% <span>recovery rate</span></div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">Cases processed</div>
+            <div class="metric-value" id="casesValue">142</div>
+            <div class="metric-foot positive">↑ 18 <span>today</span></div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">Avg. time to action</div>
+            <div class="metric-value">2m 18s</div>
+            <div class="metric-foot">Target <span>&lt; 5m</span></div>
+          </article>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel chart-panel">
+            <div class="panel-heading">
+              <div>
+                <h3>Recovery performance</h3>
+                <p>Recovered revenue over the last 7 days</p>
+              </div>
+              <select id="chartRange">
+                <option>Last 7 days</option>
+                <option>Last 30 days</option>
+              </select>
+            </div>
+            <div class="chart-wrap">
+              <div class="y-axis"><span>₹30k</span><span>₹20k</span><span>₹10k</span><span>₹0</span></div>
+              <div class="chart-area">
+                <div class="grid-line one"></div><div class="grid-line two"></div><div class="grid-line three"></div>
+                <svg class="chart-svg" viewBox="0 0 700 250" preserveAspectRatio="none" aria-label="Recovery chart">
+                  <defs>
+                    <linearGradient id="areaFill" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stop-opacity=".25"/>
+                      <stop offset="100%" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path id="chartAreaPath" d="M0,210 C80,180 100,190 160,150 S250,170 310,105 S420,130 470,80 S570,115 630,55 S670,75 700,25 L700,250 L0,250 Z" fill="url(#areaFill)"></path>
+                  <path id="chartLinePath" d="M0,210 C80,180 100,190 160,150 S250,170 310,105 S420,130 470,80 S570,115 630,55 S670,75 700,25" fill="none" stroke-width="3" stroke-linecap="round"></path>
+                  <g id="chartDots"></g>
+                </svg>
+                <div class="x-axis"><span>Aug 30</span><span>Aug 31</span><span>Sep 1</span><span>Sep 2</span><span>Sep 3</span><span>Sep 4</span><span>Sep 5</span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel agent-panel">
+            <div class="panel-heading">
+              <div>
+                <h3>Agent activity</h3>
+                <p>Latest recovery decisions</p>
+              </div>
+              <span class="pulse-label"><i></i> Working</span>
+            </div>
+            <div class="activity-list" id="activityList">
+              <div class="activity-item">
+                <span class="activity-icon success">✓</span>
+                <div><strong>Payment retry succeeded</strong><span>Order #RP-78241 · ₹8,999</span></div>
+                <time>2m</time>
+              </div>
+              <div class="activity-item">
+                <span class="activity-icon action">↗</span>
+                <div><strong>Payment link sent</strong><span>Order #RP-78238 · ₹2,499</span></div>
+                <time>8m</time>
+              </div>
+              <div class="activity-item">
+                <span class="activity-icon warning">!</span>
+                <div><strong>Escalated to human</strong><span>Order #RP-78221 · ₹18,200</span></div>
+                <time>16m</time>
+              </div>
+              <div class="activity-item">
+                <span class="activity-icon success">✓</span>
+                <div><strong>Subscription recovered</strong><span>Order #RP-78194 · ₹1,299</span></div>
+                <time>24m</time>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section class="panel queue-panel">
+          <div class="panel-heading">
+            <div>
+              <h3>Priority recovery queue</h3>
+              <p>Cases ranked by expected recoverable value</p>
+            </div>
+            <button class="text-btn" data-view-target="recovery">View all →</button>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>Customer</th><th>Issue</th><th>Amount</th><th>AI recommendation</th><th>Risk</th><th></th></tr></thead>
+              <tbody id="queueTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section class="view" id="recoveryView">
+        <div class="section-intro">
+          <div><h2>Recovery queue</h2><p>Every case has a reason, a recommended action, and a bounded next step.</p></div>
+          <div class="filter-row"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="high">High risk</button><button class="filter" data-filter="medium">Medium</button><button class="filter" data-filter="retry">Retry</button></div>
+        </div>
+        <section class="panel">
+          <div class="table-scroll"><table class="large-table">
+            <thead><tr><th>Customer</th><th>Failure reason</th><th>Amount</th><th>Recommended action</th><th>Confidence</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="recoveryTable"></tbody>
+          </table></div>
+        </section>
+      </section>
+
+      <section class="view" id="transactionsView">
+        <div class="section-intro"><div><h2>Transactions</h2><p>Payment events feeding the recovery engine.</p></div><input class="search-input" id="transactionSearch" placeholder="⌕ Search customer or order..." /></div>
+        <section class="panel"><div class="table-scroll"><table class="large-table">
+          <thead><tr><th>Order</th><th>Customer</th><th>Amount</th><th>Event</th><th>Created</th><th>Status</th></tr></thead>
+          <tbody id="transactionTable"></tbody>
+        </table></div></section>
+      </section>
+
+      <section class="view" id="agentView">
+        <div class="section-intro"><div><h2>AI recovery agent</h2><p>Decision-making with explicit tools, limits, and verification.</p></div><button class="primary-btn" id="agentRunLarge">✦ Start agent run</button></div>
+        <div class="agent-layout">
+          <section class="panel decision-panel">
+            <div class="agent-header"><div class="agent-orb">✦</div><div><span class="tag">AUTONOMOUS MODE</span><h3>Recovery decision engine</h3><p>Bounded actions only. High-value or ambiguous cases are escalated.</p></div></div>
+            <div class="pipeline">
+              <div class="pipeline-step done"><b>01</b><div><strong>Detect</strong><span>Identify revenue at risk</span></div><i>✓</i></div>
+              <div class="pipeline-line"></div>
+              <div class="pipeline-step done"><b>02</b><div><strong>Diagnose</strong><span>Determine likely failure cause</span></div><i>✓</i></div>
+              <div class="pipeline-line"></div>
+              <div class="pipeline-step current"><b>03</b><div><strong>Choose intervention</strong><span>Select lowest-risk recovery action</span></div><i>•••</i></div>
+              <div class="pipeline-line"></div>
+              <div class="pipeline-step"><b>04</b><div><strong>Execute & verify</strong><span>Run tool and confirm outcome</span></div></div>
+            </div>
+          </section>
+          <section class="panel guardrail-panel">
+            <h3>Safety guardrails</h3>
+            <div class="guardrail"><span>✓</span><div><strong>Bounded actions</strong><p>Only approved retry, link, reminder and escalation tools.</p></div></div>
+            <div class="guardrail"><span>✓</span><div><strong>Spend limits</strong><p>Agent cannot change price or issue refunds autonomously.</p></div></div>
+            <div class="guardrail"><span>✓</span><div><strong>Audit every action</strong><p>Decision, tool call and result are logged.</p></div></div>
+            <div class="guardrail"><span>✓</span><div><strong>Human escalation</strong><p>Low confidence or high-value cases are routed to review.</p></div></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="auditView">
+        <div class="section-intro"><div><h2>Audit trail</h2><p>Immutable-style activity log for the demo workflow.</p></div><button class="secondary-btn" id="clearAuditBtn">Clear demo events</button></div>
+        <section class="panel audit-panel" id="auditList"></section>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">×</button>
+      <span class="tag">RECOVERY ACTION</span>
+      <h2 id="modalTitle">Run recovery action</h2>
+      <p id="modalDescription">The agent will execute a bounded action and verify the result.</p>
+      <div class="modal-case" id="modalCase"></div>
+      <div class="modal-actions"><button class="secondary-btn" id="cancelAction">Cancel</button><button class="primary-btn" id="confirmAction">Execute action</button></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"><span>✓</span><div><strong id="toastTitle">Action completed</strong><p id="toastText">The recovery workflow finished successfully.</p></div></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
